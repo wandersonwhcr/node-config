@@ -4,6 +4,7 @@
     "description": "A Simple Configuration Loader for Node.js",
     "license": "MIT",
     "devDependencies": {
+        "assert": "^1.4.1",
         "mocha": "^3.5.0"
     },
     "scripts": {
