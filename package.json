@@ -3,6 +3,9 @@
     "version": "0.0.2",
     "description": "A Simple Configuration Loader for Node.js",
     "license": "MIT",
+    "dependencies": {
+        "merge": "^1.2.0"
+    },
     "devDependencies": {
         "assert": "^1.4.1",
         "memfs": "^2.0.11",
