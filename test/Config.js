@@ -57,5 +57,21 @@ describe("Config", function () {
                 assert.deepEqual(config, { "foo": "bar", "baz": "qux" });
             });
         });
+
+        it("fetches alphabetically", function () {
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = memfs.Volume.fromJSON({
+                "one.json": JSON.stringify({ "id": "one" }),
+                "two.json": JSON.stringify({ "id": "two" })
+            });
+
+            // Inicialização
+            var config = new Config(["two.json", "one.json"], fs);
+
+            // Execução
+            return config.fetch().then(function (config) {
+                assert.deepEqual(config, { "id": "two" });
+            });
+        });
     });
 });
