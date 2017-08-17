@@ -4,6 +4,13 @@ const assert = require("assert");
 const Config = require("../lib/Config.js");
 
 describe("Config", function () {
+    describe("Constructor", function () {
+        it("constructs with patterns", function () {
+            var config = new Config(["foo.json"]);
+            assert.deepEqual(config.getPattern(), ["foo.json"]);
+        });
+    });
+
     describe("Pattern", function () {
         it("uses encapsulation", function () {
             var config = new Config();
