@@ -74,7 +74,7 @@ describe("Config", function () {
             });
         });
 
-        it("uses glob", function () {
+        it("fetches using glob", function () {
             // Mock: Manipulador de Sistema de Arquivos
             var fs = memfs.Volume.fromJSON({
                 "foo.json": JSON.stringify({ "foo": "baz" }),
@@ -87,6 +87,23 @@ describe("Config", function () {
             // Execução
             return config.fetch().then(function (config) {
                 assert.deepEqual(config, { "foo": "baz", "bar": "qux" });
+            });
+        });
+
+        it("fetches directories", function () {
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = memfs.Volume.fromJSON({
+                "config/default.d/00-default.json": JSON.stringify({ "foo": "bar" }),
+                "config/default.d/10-baz.json": JSON.stringify({ "baz": "qux" }),
+                "config/local.d/99-local.json": JSON.stringify({ "foo": "foo", "one": "two" })
+            });
+
+            // Inicialização
+            var config = new Config(["config/default.d/*.json", "config/local.d/*.json"], fs);
+
+            // Execução
+            return config.fetch().then(function (config) {
+                assert.deepEqual(config, { "foo": "foo", "baz": "qux", "one": "two" });
             });
         });
     });
