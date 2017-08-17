@@ -44,12 +44,12 @@ describe("Config", function () {
     describe("Fetch", function () {
         it("fetches from filesystem", function () {
             // Mock: Manipulador de Sistema de Arquivos
-            var fs = new memfs.Volume({
-                "foo.bar": JSON.stringify({ "foo": "bar" })
+            var fs = memfs.Volume.fromJSON({
+                "foo.json": JSON.stringify({ "foo": "bar" })
             });
 
             // Inicialização
-            var config = new Config(["foo.bar"], fs);
+            var config = new Config(["foo.json"], fs);
 
             // Execução
             return config.fetch().then(function (config) {
