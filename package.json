@@ -1,0 +1,10 @@
+{
+    "name": "@wandersonwhcr/config",
+    "version": "0.0.1",
+    "description": "A Simple Configuration Loader for Node.js",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://wandersonwhcr@github.com/wandersonwhcr/node-config.git"
+    }
+}
