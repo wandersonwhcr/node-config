@@ -106,5 +106,27 @@ describe("Config", function () {
                 assert.deepEqual(config, { "foo": "foo", "baz": "qux", "one": "two" });
             });
         });
+
+        it("handles errors", function () {
+            // Capturador
+            var handler = { "hasSyntaxErrors": false };
+
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = memfs.Volume.fromJSON({
+                "foo.json": "Hello, Foo!"
+            });
+
+            // Inicialização
+            var config = new Config(["*.json"], fs);
+
+            // Execução
+            return config.fetch().catch(function (error) {
+                // Erro Tratado Corretamente!
+                handler.hasSyntaxErrors = true;
+            }).then(function () {
+                // Tratado Corretamente?
+                assert.ok(handler.hasSyntaxErrors);
+            });
+        });
     });
 });
