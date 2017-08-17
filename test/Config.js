@@ -10,6 +10,12 @@ describe("Config", function () {
             var config = new Config(["foo.json"]);
             assert.deepEqual(config.getPattern(), ["foo.json"]);
         });
+
+        it("constructs with file system", function () {
+            var fs     = new memfs.Volume();
+            var config = new Config(undefined, fs);
+            assert.deepEqual(config.getFs(), fs);
+        });
     });
 
     describe("Pattern", function () {
@@ -25,8 +31,8 @@ describe("Config", function () {
 
     describe("Fs", function () {
         it("uses encapsulation", function () {
-            var config = new Config();
             var fs     = new memfs.Volume();
+            var config = new Config();
             assert.equal(config.getFs(), undefined);
             assert.equal(config.setFs(fs), undefined);
             assert.deepEqual(config.getFs(), fs);
