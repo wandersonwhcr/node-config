@@ -1,6 +1,7 @@
 "use strict";
 
 const assert = require("assert");
+const fs     = require("fs");
 const memfs  = require("memfs")
 const Config = require("../lib/Config.js");
 
@@ -33,11 +34,16 @@ describe("Config", function () {
         it("uses encapsulation", function () {
             var fs     = new memfs.Volume();
             var config = new Config();
-            assert.equal(config.getFs(), undefined);
+            assert.notEqual(config.getFs(), undefined);
             assert.equal(config.setFs(fs), undefined);
             assert.deepEqual(config.getFs(), fs);
             assert.equal(config.setFs(), undefined);
-            assert.equal(config.getFs(), undefined);
+            assert.notEqual(config.getFs(), undefined);
+        });
+
+        it("defaults to fs", function () {
+            var config = new Config();
+            assert.deepEqual(config.getFs(), fs);
         });
     });
 
