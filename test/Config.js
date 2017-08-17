@@ -45,15 +45,16 @@ describe("Config", function () {
         it("fetches from filesystem", function () {
             // Mock: Manipulador de Sistema de Arquivos
             var fs = memfs.Volume.fromJSON({
-                "foo.json": JSON.stringify({ "foo": "bar" })
+                "foo.json": JSON.stringify({ "foo": "bar" }),
+                "baz.json": JSON.stringify({ "baz": "qux" })
             });
 
             // Inicialização
-            var config = new Config(["foo.json"], fs);
+            var config = new Config(["foo.json", "baz.json"], fs);
 
             // Execução
             return config.fetch().then(function (config) {
-                assert.deepEqual(config, { "foo": "bar" });
+                assert.deepEqual(config, { "foo": "bar", "baz": "qux" });
             });
         });
     });
