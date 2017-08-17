@@ -3,8 +3,13 @@
     "version": "0.0.2",
     "description": "A Simple Configuration Loader for Node.js",
     "license": "MIT",
+    "dependencies": {
+        "merge": "^1.2.0",
+        "minimatch": "^3.0.4"
+    },
     "devDependencies": {
         "assert": "^1.4.1",
+        "memfs": "^2.0.11",
         "mocha": "^3.5.0"
     },
     "scripts": {
