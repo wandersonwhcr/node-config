@@ -3,6 +3,9 @@
     "version": "0.0.2",
     "description": "A Simple Configuration Loader for Node.js",
     "license": "MIT",
+    "engines": {
+        "node": "^6.11.2"
+    },
     "devDependencies": {
         "assert": "^1.4.1",
         "mocha": "^3.5.0"
