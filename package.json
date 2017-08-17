@@ -3,6 +3,13 @@
     "version": "0.0.1",
     "description": "A Simple Configuration Loader for Node.js",
     "license": "MIT",
+    "devDependencies": {
+        "assert": "^1.4.1",
+        "mocha": "^3.5.0"
+    },
+    "scripts": {
+        "test": "mocha"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://wandersonwhcr@github.com/wandersonwhcr/node-config.git"
