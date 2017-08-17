@@ -11,7 +11,7 @@ describe("Config", function () {
             assert.deepEqual(config.getPattern(), ["foo.json"]);
         });
 
-        it("constructs with file system", function () {
+        it("constructs with filesystem", function () {
             var fs     = new memfs.Volume();
             var config = new Config(undefined, fs);
             assert.deepEqual(config.getFs(), fs);
@@ -38,6 +38,23 @@ describe("Config", function () {
             assert.deepEqual(config.getFs(), fs);
             assert.equal(config.setFs(), undefined);
             assert.equal(config.getFs(), undefined);
+        });
+    });
+
+    describe("Fetch", function () {
+        it("fetches from filesystem", function () {
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = new memfs.Volume({
+                "foo.bar": JSON.stringify({ "foo": "bar" })
+            });
+
+            // Inicialização
+            var config = new Config(["foo.bar"], fs);
+
+            // Execução
+            return config.fetch().then(function (config) {
+                assert.deepEqual(config, { "foo": "bar" });
+            });
         });
     });
 });
