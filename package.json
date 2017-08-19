@@ -2,6 +2,7 @@
     "name": "@wandersonwhcr/config",
     "version": "1.0.1",
     "description": "A Simple Configuration Loader for Node.js",
+    "keywords": ["configuration", "loader", "merge"],
     "license": "MIT",
     "dependencies": {
         "merge": "^1.2.0",
