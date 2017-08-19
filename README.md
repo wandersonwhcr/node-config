@@ -26,3 +26,9 @@ config.fetch().then(function (config) {
     // Whoops!
 });
 ```
+
+## License
+
+This project is licensed under MIT License. See
+[`LICENSE`](//github.com/wandersonwhcr/node-config/blob/master/LICENSE)
+file for details.
