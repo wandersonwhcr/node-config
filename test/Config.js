@@ -135,4 +135,23 @@ describe("Config", function () {
             });
         });
     });
+
+    describe("FetchSync", function () {
+        it("fetches synchronous", function () {
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = memfs.Volume.fromJSON({
+                "foobar.json": JSON.stringify({ "foo": "bar", "baz": "qux" }),
+                "foobaz.json": JSON.stringify({ "foo": "baz" })
+            });
+
+            // Inicialização
+            var config = new Config(["*.json"], fs);
+
+            // Execução
+            var data = config.fetchSync();
+
+            // Verificações
+            assert.deepStrictEqual(data, {"foo": "baz", "baz": "qux"});
+        });
+    });
 });
