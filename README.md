@@ -8,6 +8,8 @@ A Simple Configuration Loader for Node.js
 
 ## Usage
 
+This package can be used to load configurations asynchronously using Promises.
+
 ```js
 // Dependencies
 const Config = require("@wandersonwhcr/config").Config;
@@ -24,11 +26,19 @@ var config = new Config([
 
 // Fetch Files
 config.fetch().then(function (config) {
-    console.log(config);
     // { "foo": "one", "baz": "qux", "somebody": "someone" }
 }).catch(function (error) {
     // Whoops!
 });
+```
+
+Synchronous configuration loading can be used directly, but it's not
+recommended.
+
+```js
+// Fetch Files (Sync)
+var result = config.fetchSync();
+// { "foo": "one", "baz": "qux", "somebody": "someone" }
 ```
 
 ## License
