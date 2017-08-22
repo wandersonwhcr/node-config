@@ -28,6 +28,15 @@ config.fetch().then(function (config) {
 });
 ```
 
+Synchronous configuration loading can be used directly, but it's not
+recommended.
+
+```js
+// Fetch Files (Sync)
+var result = config.fetchSync();
+// { "foo": "one", "baz": "qux", "somebody": "someone" }
+```
+
 ## License
 
 This project is licensed under MIT License. See
