@@ -96,6 +96,24 @@ describe("Config", function () {
             });
         });
 
+        it("fetches using current path", function () {
+            // Mock: Manipulador de Sistema de Arquivos
+            var fs = memfs.Volume.fromJSON({
+                "foo.json": JSON.stringify({ "foo": "bar" })
+            });
+
+            // Inicialização
+            var config = new Config(["./*.json"], fs);
+
+            // Execução
+            return config.fetch().then(function (data) {
+                // Carregamento com Sucesso
+                assert.deepEqual(data, { "foo": "bar" });
+                // Mantém Configuração Idêntica
+                assert.deepEqual(config.getPattern(), ["./*.json"]);
+            });
+        });
+
         it("fetches directories", function () {
             // Mock: Manipulador de Sistema de Arquivos
             var fs = memfs.Volume.fromJSON({
