@@ -9,7 +9,7 @@
         "minimatch": "^3.0.2"
     },
     "devDependencies": {
-        "assert": "^1.4.1",
+        "assert": "^1.0.0",
         "memfs": "^2.0.11",
         "mocha": "^3.5.0"
     },
