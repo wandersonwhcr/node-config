@@ -5,7 +5,7 @@
     "keywords": ["configuration", "loader", "merge"],
     "license": "MIT",
     "dependencies": {
-        "merge": "^1.2.0",
+        "merge": "^1.0.0",
         "minimatch": "^3.0.4"
     },
     "devDependencies": {
