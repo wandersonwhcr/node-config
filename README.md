@@ -2,6 +2,8 @@
 
 A Simple Configuration Loader for Node.js
 
+[![Travis](https://img.shields.io/travis/wandersonwhcr/node-config.svg)](https://travis-ci.org/wandersonwhcr/node-config)
+
 ## Usage
 
 ```js
