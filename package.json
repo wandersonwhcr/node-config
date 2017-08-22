@@ -14,7 +14,7 @@
         "mocha": "^3.5.0"
     },
     "engines": {
-        "node": "^6.11.2"
+        "node": "^4.8.4"
     },
     "scripts": {
         "test": "mocha"
