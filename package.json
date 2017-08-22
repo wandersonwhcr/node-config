@@ -5,16 +5,16 @@
     "keywords": ["configuration", "loader", "merge"],
     "license": "MIT",
     "dependencies": {
-        "merge": "^1.2.0",
-        "minimatch": "^3.0.4"
+        "merge": "^1.0.0",
+        "minimatch": "^3.0.2"
     },
     "devDependencies": {
-        "assert": "^1.4.1",
-        "memfs": "^2.0.11",
-        "mocha": "^3.5.0"
+        "assert": "^1.0.0",
+        "memfs": "^2.0.5",
+        "mocha": "^3.0.0"
     },
     "engines": {
-        "node": "^6.11.2"
+        "node": "^4.8.4"
     },
     "scripts": {
         "test": "mocha"
