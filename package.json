@@ -10,8 +10,14 @@
     },
     "devDependencies": {
         "assert": "^1.0.0",
+        "eslint": "^4.6.0",
+        "eslint-config-airbnb": "^15.1.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-jsx-a11y": "^5.1.0",
+        "eslint-plugin-react": "^7.3.0",
         "memfs": "^2.0.5",
-        "mocha": "^3.0.0"
+        "mocha": "^3.0.0",
+        "mocha-eslint": "^4.1.0"
     },
     "engines": {
         "node": "^4.8.4"
