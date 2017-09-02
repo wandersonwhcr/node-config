@@ -2,7 +2,7 @@
 
 A Simple Configuration Loader for Node.js
 
-[![Travis](https://img.shields.io/travis/wandersonwhcr/node-config.svg)](https://travis-ci.org/wandersonwhcr/node-config)
+[![Travis](https://img.shields.io/travis/wandersonwhcr/node-config/master.svg)](https://travis-ci.org/wandersonwhcr/node-config)
 [![npm](https://img.shields.io/npm/v/@wandersonwhcr/config.svg)](https://www.npmjs.com/package/@wandersonwhcr/config)
 [![license](https://img.shields.io/github/license/wandersonwhcr/node-config.svg)](https://github.com/wandersonwhcr/node-config/blob/master/LICENSE)
 
