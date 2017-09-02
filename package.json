@@ -23,7 +23,7 @@
         "node": "^4.8.4"
     },
     "scripts": {
-        "test": "eslint . && mocha"
+        "test": "mocha"
     },
     "repository": {
         "type": "git",
