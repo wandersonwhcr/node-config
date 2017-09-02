@@ -1,6 +1,6 @@
 {
     "name": "@wandersonwhcr/config",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A Simple Configuration Loader for Node.js",
     "keywords": ["configuration", "loader", "merge"],
     "license": "MIT",
