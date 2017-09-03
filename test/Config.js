@@ -14,12 +14,6 @@ describe('Config', () => {
       const config = new Config(['foo.json']);
       assert.deepEqual(config.getPattern(), ['foo.json']);
     });
-
-    it('constructs with filesystem', () => {
-      const aFs = new memfs.Volume();
-      const config = new Config(undefined, aFs);
-      assert.deepEqual(config.getFs(), aFs);
-    });
   });
 
   describe('Pattern', () => {
@@ -59,7 +53,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['foo.json', 'baz.json'], aFs);
+      const config = new Config(['foo.json', 'baz.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().then(aConfig => assert.deepEqual(aConfig, { foo: 'bar', baz: 'qux' }));
@@ -73,7 +69,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['two.json', 'one.json'], aFs);
+      const config = new Config(['two.json', 'one.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().then(aConfig => assert.deepEqual(aConfig, { id: 'two' }));
@@ -87,7 +85,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['*.json'], aFs);
+      const config = new Config(['*.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().then(aConfig => assert.deepEqual(aConfig, { foo: 'baz', bar: 'qux' }));
@@ -100,7 +100,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['./*.json'], aFs);
+      const config = new Config(['./*.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().then((data) => {
@@ -120,7 +122,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['config/default.d/*.json', 'config/local.d/*.json'], aFs);
+      const config = new Config(['config/default.d/*.json', 'config/local.d/*.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().then(
@@ -138,7 +142,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['*.json'], aFs);
+      const config = new Config(['*.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Execução
       return config.fetch().catch(() => {
@@ -160,7 +166,9 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['*.json'], aFs);
+      const config = new Config(['*.json']);
+      // Configuração
+      config.setFs(aFs);
 
       // Verificações
       assert.deepStrictEqual(config.fetchSync(), { foo: 'baz', baz: 'qux' });
