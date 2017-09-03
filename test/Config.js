@@ -69,12 +69,28 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['two.json', 'one.json']);
+      const config = new Config(['*.json']);
       // Configuração
       config.setFs(aFs);
 
       // Execução
       return config.fetch().then(aConfig => assert.deepEqual(aConfig, { id: 'two' }));
+    });
+
+    it('fetches ordering by patterns', () => {
+      // Mock: Manipulador de Sistema de Arquivos
+      const aFs = memfs.Volume.fromJSON({
+        'config/default.json': JSON.stringify({ foo: 'one' }),
+        'config/default.d/default.json': JSON.stringify({ foo: 'two' }),
+      });
+
+      // Inicialização
+      const config = new Config(['config/default.json', 'config/default.d/*.json']);
+      // Configuração
+      config.setFs(aFs);
+
+      // Execução
+      return config.fetch().then(aConfig => assert.deepEqual(aConfig, { foo: 'two' }));
     });
 
     it('fetches using glob', () => {
