@@ -133,11 +133,11 @@ describe('Config', () => {
       // Mock: Manipulador de Sistema de Arquivos
       const aFs = memfs.Volume.fromJSON({
         '/config.d/foo.json': JSON.stringify({ foo: 'bar' }),
-        '/home/foobar/.config.d/baz.json': JSON.stringify({ baz: 'qux' }),
+        '../config.d/baz.json': JSON.stringify({ baz: 'qux' }),
       });
 
       // Inicialização
-      const config = new Config(['/config.d/*.json', '/home/foobar/.config.d/*.json']);
+      const config = new Config(['/config.d/*.json', '../config.d/*.json']);
       // Configuração
       config.setFs(aFs);
 
