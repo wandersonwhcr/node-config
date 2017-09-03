@@ -129,6 +129,25 @@ describe('Config', () => {
       });
     });
 
+    it('fetches using outside path', () => {
+      // Mock: Manipulador de Sistema de Arquivos
+      const aFs = memfs.Volume.fromJSON({
+        '/config.d/foo.json': JSON.stringify({ foo: 'bar' }),
+        '../config.d/baz.json': JSON.stringify({ baz: 'qux' }),
+      });
+
+      // Inicialização
+      const config = new Config(['/config.d/*.json', '../config.d/*.json']);
+      // Configuração
+      config.setFs(aFs);
+
+      // Execução
+      return config.fetch().then((data) => {
+        // Carregamento com Sucesso
+        assert.deepEqual(data, { foo: 'bar', baz: 'qux' });
+      });
+    });
+
     it('fetches directories', () => {
       // Mock: Manipulador de Sistema de Arquivos
       const aFs = memfs.Volume.fromJSON({
