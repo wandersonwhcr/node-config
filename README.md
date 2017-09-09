@@ -41,6 +41,11 @@ var result = config.fetchSync();
 // { "foo": "one", "baz": "qux", "somebody": "someone" }
 ```
 
+## Reason
+
+I created this package because I didn't find any other package that loads files
+by glob and merges them alphabetically by filename.
+
 ## License
 
 This project is licensed under MIT License. See
