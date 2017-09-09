@@ -78,16 +78,58 @@ describe('Config', () => {
     });
 
     it('fetches ordering by patterns', () => {
-      // Mock: Manipulador de Sistema de Arquivos
-      const aFs = memfs.Volume.fromJSON({
-        'config/default.json': JSON.stringify({ foo: 'one' }),
-        'config/default.d/default.json': JSON.stringify({ foo: 'two' }),
-      });
+      // Mock: Situação do Arquivo
+      function FsMockStatSyncResult() {}
+      // Mock: Verificação se Diretório
+      FsMockStatSyncResult.prototype.isDirectory = function FsMockStatSyncResultIsDirectory() {
+        // Nenhum é Diretório
+        return false;
+      };
+
+      // Mock: Manipulador de Sistema de Arquivos (Local)
+      function FsMock() {}
+      // Mock: Leitura de Diretório
+      FsMock.prototype.readdirSync = function FsMockReaddirSync(directory) {
+        // Configuração Básica
+        if (directory === 'config') {
+          // Apresentação Única
+          return ['default.json'];
+        }
+        // Diretório de Configurações
+        if (directory === 'config/default.d') {
+          // Apresentação (Fora de Ordem)
+          return ['10-bazqux.json', '00-foobar.json'];
+        }
+        // Nenhum Elemento Encontrado
+        return [];
+      };
+      // Mock: Informações do Arquivo
+      FsMock.prototype.statSync = function FsMockStatSync() {
+        // Apresentação
+        return new FsMockStatSyncResult();
+      };
+      // Mock: Leitura do Arquivo
+      FsMock.prototype.readFileSync = function FsMockReadFileSync(filename) {
+        // Arquivo Principal
+        if (filename === 'config/default.json') {
+          return JSON.stringify({ foo: 'default' });
+        }
+        // Arquivo Secundário
+        if (filename === 'config/default.d/00-foobar.json') {
+          return JSON.stringify({ foo: 'one' });
+        }
+        // Arquivo Secundário
+        if (filename === 'config/default.d/10-bazqux.json') {
+          return JSON.stringify({ foo: 'two' });
+        }
+        // Apresentação
+        return JSON.stringify({});
+      };
 
       // Inicialização
       const config = new Config(['config/default.json', 'config/default.d/*.json']);
       // Configuração
-      config.setFs(aFs);
+      config.setFs(new FsMock());
 
       // Execução
       return config.fetch().then(aConfig => assert.deepEqual(aConfig, { foo: 'two' }));
