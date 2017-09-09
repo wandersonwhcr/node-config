@@ -44,7 +44,9 @@ var result = config.fetchSync();
 ## Reason
 
 I created this package because I didn't find any other package that loads files
-by glob and merges them alphabetically by filename.
+by glob and merges them alphabetically by filename. This package is very
+inspired by Zend Framework's configuration loading and a lot of Linux packages
+that load configuration from directories (aka `conf.d` directories).
 
 ## License
 
