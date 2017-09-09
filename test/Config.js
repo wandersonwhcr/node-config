@@ -3,6 +3,7 @@
 const assert = require('assert');
 const fs = require('fs');
 const memfs = require('memfs');
+const spyfs = require('spyfs');
 
 const Config = require('../lib/Config.js');
 
@@ -207,6 +208,39 @@ describe('Config', () => {
       return config.fetch().then(
         aConfig => assert.deepEqual(aConfig, { foo: 'foo', baz: 'qux', one: 'two' })
       );
+    });
+
+    it('loads files once', () => {
+      // Inicialização
+      const counter = {};
+
+      // Mock: Manipulador de Sistema de Arquivos
+      const aFs = memfs.Volume.fromJSON({
+        'foo.json': JSON.stringify({}),
+      });
+
+      // Mock: Verificador de Sistema de Arquivos
+      const anFs = spyfs.spy(aFs);
+      // Mock: Contabilizar Leituras
+      anFs.on('readFileSync', (params) => {
+        // Inicialização
+        const filename = params.args[0];
+        // Contador Inicializado?
+        if (typeof counter[filename] === 'undefined') {
+          // Inicialização
+          counter[filename] = 0;
+        }
+        // Contabilização
+        counter[filename] += 1;
+      });
+
+      // Inicialização
+      const config = new Config(['foo.json', 'foo.json']);
+      // Configuração
+      config.setFs(anFs);
+
+      // Execução
+      return config.fetch().then(() => assert.strictEqual(1, counter['foo.json']));
     });
 
     it('handles errors', () => {
