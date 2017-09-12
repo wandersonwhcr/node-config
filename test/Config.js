@@ -216,7 +216,8 @@ describe('Config', () => {
 
       // Mock: Manipulador de Sistema de Arquivos
       const aFs = memfs.Volume.fromJSON({
-        'foo.json': JSON.stringify({}),
+        'foo.json': JSON.stringify({ foo: 'one' }),
+        'bar.json': JSON.stringify({ foo: 'two' }),
       });
 
       // Mock: Verificador de Sistema de Arquivos
@@ -235,12 +236,16 @@ describe('Config', () => {
       });
 
       // Inicialização
-      const config = new Config(['foo.json', 'foo.json']);
+      const config = new Config(['foo.json', 'bar.json', 'foo.json']);
       // Configuração
       config.setFs(anFs);
 
       // Execução
-      return config.fetch().then(() => assert.strictEqual(1, counter['foo.json']));
+      return config.fetch().then((aConfig) => {
+        assert.strictEqual(1, counter['foo.json']);
+        assert.strictEqual(1, counter['bar.json']);
+        assert.strictEqual({ foo: 'one' }, aConfig);
+      });
     });
 
     it('handles errors', () => {
